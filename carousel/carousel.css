@@ -1,10 +1,5 @@
-/* 
- * 	Core Owl Carousel CSS File
- *	v1.3.3
- */
 
-/* clearfix */
-.owl-carousel .owl-wrapper:after {
+.carousel .wrapper:after {
 	content: ".";
 	display: block;
 	clear: both;
@@ -13,23 +8,23 @@
 	height: 0;
 }
 /* display none until init */
-.owl-carousel{
+.carousel{
 	display: none;
 	position: relative;
 	width: 100%;
 	-ms-touch-action: pan-y;
 }
-.owl-carousel .owl-wrapper{
+.carousel .wrapper{
 	display: none;
 	position: relative;
 	-webkit-transform: translate3d(0px, 0px, 0px);
 }
-.owl-carousel .owl-wrapper-outer{
+.carousel .wrapperouter{
 	overflow: hidden;
 	position: relative;
 	width: 100%;
 }
-.owl-carousel .owl-wrapper-outer.autoHeight{
+.carousel .wrapperouter.autoHeight{
 	-webkit-transition: height 500ms ease-in-out;
 	-moz-transition: height 500ms ease-in-out;
 	-ms-transition: height 500ms ease-in-out;
@@ -37,14 +32,14 @@
 	transition: height 500ms ease-in-out;
 }
 	
-.owl-carousel .owl-item{
+.carousel .imageitem{
 	float: left;
 }
-.owl-controls .owl-page,
-.owl-controls .owl-buttons div{
+.controls .page,
+.controls .buttons div{
 	cursor: pointer;
 }
-.owl-controls {
+.controls {
 	-webkit-user-select: none;
 	-khtml-user-select: none;
 	-moz-user-select: none;
@@ -59,8 +54,8 @@
 }
 
 /* fix */
-.owl-carousel  .owl-wrapper,
-.owl-carousel  .owl-item{
+.carousel  .wrapper,
+.carousel  .item{
 	-webkit-backface-visibility: hidden;
 	-moz-backface-visibility:    hidden;
 	-ms-backface-visibility:     hidden;

@@ -1,16 +1,13 @@
-/*
-* 	Owl Carousel Owl Demo Theme 
-*	v1.3.3
-*/
 
-.owl-theme .owl-controls{
+
+.theme .controls{
 	margin-top: 10px;
 	text-align: center;
 }
 
-/* Styling Next and Prev buttons */
 
-.owl-theme .owl-controls .owl-buttons div{
+
+.theme .controls .buttons div{
 	color: #FFF;
 	display: inline-block;
 	zoom: 1;
@@ -25,9 +22,8 @@
 	filter: Alpha(Opacity=50);/*IE7 fix*/
 	opacity: 0.5;
 }
-/* Clickable class fix problem with hover on touch devices */
-/* Use it for non-touch hover action */
-.owl-theme .owl-controls.clickable .owl-buttons div:hover{
+
+.theme .controls.clickable .buttons div:hover{
 	filter: Alpha(Opacity=100);/*IE7 fix*/
 	opacity: 1;
 	text-decoration: none;
@@ -35,12 +31,12 @@
 
 /* Styling Pagination*/
 
-.owl-theme .owl-controls .owl-page{
+.theme .controls .page{
 	display: inline-block;
 	zoom: 1;
 	*display: inline;/*IE7 life-saver */
 }
-.owl-theme .owl-controls .owl-page span{
+.theme .controls .page span{
 	display: block;
 	width: 12px;
 	height: 12px;
@@ -53,15 +49,15 @@
 	background: #869791;
 }
 
-.owl-theme .owl-controls .owl-page.active span,
-.owl-theme .owl-controls.clickable .owl-page:hover span{
+.theme .controls .page.active span,
+.theme .controls.clickable .page:hover span{
 	filter: Alpha(Opacity=100);/*IE7 fix*/
 	opacity: 1;
 }
 
 /* If PaginationNumbers is true */
 
-.owl-theme .owl-controls .owl-page span.owl-numbers{
+.theme .controls .page span.numbers{
 	height: auto;
 	width: auto;
 	color: #FFF;
@@ -73,7 +69,7 @@
 }
 
 /* preloading images */
-.owl-item.loading{
+.item.loading{
 	min-height: 150px;
 	background: url(AjaxLoader.gif) no-repeat center center
 }

@@ -4,7 +4,7 @@ $(function(){
 
 jQuery(document).ready(function($) {
 
-	//Download Link Highlight
+
 	if($("body").data("page")==="frontpage"){
 		$(window).scroll(function(){
 			var scrolled = $(window).scrollTop();
