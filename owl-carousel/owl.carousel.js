@@ -1,4 +1,16 @@
+/*
+ *  jQuery OwlCarousel v1.3.3
+ *
+ *  Copyright (c) 2013 Bartosz Wojciechowski
+ *  http://www.owlgraphic.com/owlcarousel/
+ *
+ *  Licensed under MIT
+ *
+ */
 
+/*JS Lint helpers: */
+/*global dragMove: false, dragEnd: false, $, jQuery, alert, window, document */
+/*jslint nomen: true, continue:true */
 
 if (typeof Object.create !== "function") {
     Object.create = function (obj) {
@@ -14,7 +26,7 @@ if (typeof Object.create !== "function") {
             var base = this;
 
             base.$elem = $(el);
-            base.options = $.extend({}, $.fn.Carousel.options, base.$elem.data(), options);
+            base.options = $.extend({}, $.fn.owlCarousel.options, base.$elem.data(), options);
 
             base.userOptions = options;
             base.loadContent();
@@ -72,8 +84,8 @@ if (typeof Object.create !== "function") {
             base.$userItems = base.$elem.children();
             base.itemsAmount = base.$userItems.length;
             base.wrapItems();
-            base.$imageItems = base.$elem.find(".imageitem");
-            base.$Wrapper = base.$elem.find(".wrapper");
+            base.$owlItems = base.$elem.find(".owl-item");
+            base.$owlWrapper = base.$elem.find(".owl-wrapper");
             base.playDirection = "next";
             base.prevItem = 0;
             base.prevArr = [0];
@@ -175,9 +187,9 @@ if (typeof Object.create !== "function") {
 
         wrapItems : function () {
             var base = this;
-            base.$userItems.wrapAll("<div class=\"wrapper\">").wrap("<div class=\"imageitem\"></div>");
-            base.$elem.find(".wrapper").wrap("<div class=\"wrapperouter\">");
-            base.wrapperOuter = base.$elem.find(".wrapperouter");
+            base.$userItems.wrapAll("<div class=\"owl-wrapper\">").wrap("<div class=\"owl-item\"></div>");
+            base.$elem.find(".owl-wrapper").wrap("<div class=\"owl-wrapper-outer\">");
+            base.wrapperOuter = base.$elem.find(".owl-wrapper-outer");
             base.$elem.css("display", "block");
         },
 
@@ -294,24 +306,24 @@ if (typeof Object.create !== "function") {
                 roundPages = 0,
                 lastItem = base.itemsAmount - base.options.items;
 
-            base.$ImageItems.each(function (index) {
+            base.$owlItems.each(function (index) {
                 var $this = $(this);
                 $this
                     .css({"width": base.itemWidth})
-                    .data("Imageitem", Number(index));
+                    .data("owl-item", Number(index));
 
                 if (index % base.options.items === 0 || index === lastItem) {
                     if (!(index > lastItem)) {
                         roundPages += 1;
                     }
                 }
-                $this.data("roundPages", roundPages);
+                $this.data("owl-roundPages", roundPages);
             });
         },
 
         appendWrapperSizes : function () {
             var base = this,
-                width = base.$ImageItems.length * base.itemWidth;
+                width = base.$owlItems.length * base.itemWidth;
 
             base.$owlWrapper.css({
                 "width": width * 2,
@@ -367,8 +379,8 @@ if (typeof Object.create !== "function") {
                 base.positionsInArray.push(-elWidth);
 
                 if (base.options.scrollPerPage === true) {
-                    item = $(base.$ImageItems[i]);
-                    roundPageNum = item.data("roundPages");
+                    item = $(base.$owlItems[i]);
+                    roundPageNum = item.data("owl-roundPages");
                     if (roundPageNum !== prev) {
                         base.pagesInArray[prev] = base.positionsInArray[i];
                         prev = roundPageNum;
@@ -380,7 +392,7 @@ if (typeof Object.create !== "function") {
         buildControls : function () {
             var base = this;
             if (base.options.navigation === true || base.options.pagination === true) {
-                base.owlControls = $("<div class=\"controls\"/>").toggleClass("clickable", !base.browser.isTouch).appendTo(base.$elem);
+                base.owlControls = $("<div class=\"owl-controls\"/>").toggleClass("clickable", !base.browser.isTouch).appendTo(base.$elem);
             }
             if (base.options.pagination === true) {
                 base.buildPagination();
@@ -392,16 +404,16 @@ if (typeof Object.create !== "function") {
 
         buildButtons : function () {
             var base = this,
-                buttonsWrapper = $("<div class=\"buttons\"/>");
+                buttonsWrapper = $("<div class=\"owl-buttons\"/>");
             base.owlControls.append(buttonsWrapper);
 
             base.buttonPrev = $("<div/>", {
-                "class" : "prev",
+                "class" : "owl-prev",
                 "html" : base.options.navigationText[0] || ""
             });
 
             base.buttonNext = $("<div/>", {
-                "class" : "next",
+                "class" : "owl-next",
                 "html" : base.options.navigationText[1] || ""
             });
 
@@ -409,13 +421,13 @@ if (typeof Object.create !== "function") {
                 .append(base.buttonPrev)
                 .append(base.buttonNext);
 
-            buttonsWrapper.on("touchstart.Controls mousedown.owlControls", "div[class^=\"owl\"]", function (event) {
+            buttonsWrapper.on("touchstart.owlControls mousedown.owlControls", "div[class^=\"owl\"]", function (event) {
                 event.preventDefault();
             });
 
-            buttonsWrapper.on("touchend.Controls mouseup.Controls", "div[class^=\"owl\"]", function (event) {
+            buttonsWrapper.on("touchend.owlControls mouseup.owlControls", "div[class^=\"owl\"]", function (event) {
                 event.preventDefault();
-                if ($(this).hasClass("next")) {
+                if ($(this).hasClass("owl-next")) {
                     base.next();
                 } else {
                     base.prev();
@@ -427,12 +439,12 @@ if (typeof Object.create !== "function") {
             var base = this;
 
             base.paginationWrapper = $("<div class=\"owl-pagination\"/>");
-            base.Controls.append(base.paginationWrapper);
+            base.owlControls.append(base.paginationWrapper);
 
-            base.paginationWrapper.on("touchend.owlControls mouseup.Controls", ".page", function (event) {
+            base.paginationWrapper.on("touchend.owlControls mouseup.owlControls", ".owl-page", function (event) {
                 event.preventDefault();
-                if (Number($(this).data("page")) !== base.currentItem) {
-                    base.goTo(Number($(this).data("page")), true);
+                if (Number($(this).data("owl-page")) !== base.currentItem) {
+                    base.goTo(Number($(this).data("owl-page")), true);
                 }
             });
         },
@@ -462,16 +474,16 @@ if (typeof Object.create !== "function") {
                         lastItem = base.itemsAmount - base.options.items;
                     }
                     paginationButton = $("<div/>", {
-                        "class" : "page"
+                        "class" : "owl-page"
                     });
                     paginationButtonInner = $("<span></span>", {
                         "text": base.options.paginationNumbers === true ? counter : "",
-                        "class": base.options.paginationNumbers === true ? "numbers" : ""
+                        "class": base.options.paginationNumbers === true ? "owl-numbers" : ""
                     });
                     paginationButton.append(paginationButtonInner);
 
-                    paginationButton.data("page", lastPage === i ? lastItem : i);
-                    paginationButton.data("roundPages", counter);
+                    paginationButton.data("owl-page", lastPage === i ? lastItem : i);
+                    paginationButton.data("owl-roundPages", counter);
 
                     base.paginationWrapper.append(paginationButton);
                 }
@@ -483,10 +495,10 @@ if (typeof Object.create !== "function") {
             if (base.options.pagination === false) {
                 return false;
             }
-            base.paginationWrapper.find(".page").each(function () {
-                if ($(this).data("roundPages") === $(base.$owlItems[base.currentItem]).data("roundPages")) {
+            base.paginationWrapper.find(".owl-page").each(function () {
+                if ($(this).data("owl-roundPages") === $(base.$owlItems[base.currentItem]).data("owl-roundPages")) {
                     base.paginationWrapper
-                        .find(".page")
+                        .find(".owl-page")
                         .removeClass("active");
                     $(this).addClass("active");
                 }
@@ -520,19 +532,19 @@ if (typeof Object.create !== "function") {
             var base = this;
             base.updatePagination();
             base.checkNavigation();
-            if (base.Controls) {
+            if (base.owlControls) {
                 if (base.options.items >= base.itemsAmount) {
-                    base.Controls.hide();
+                    base.owlControls.hide();
                 } else {
-                    base.Controls.show();
+                    base.owlControls.show();
                 }
             }
         },
 
         destroyControls : function () {
             var base = this;
-            if (base.Controls) {
-                base.Controls.remove();
+            if (base.owlControls) {
+                base.owlControls.remove();
             }
         },
 
@@ -713,11 +725,11 @@ if (typeof Object.create !== "function") {
         swapSpeed : function (action) {
             var base = this;
             if (action === "slideSpeed") {
-                base.$Wrapper.css(base.addCssSpeed(base.options.slideSpeed));
+                base.$owlWrapper.css(base.addCssSpeed(base.options.slideSpeed));
             } else if (action === "paginationSpeed") {
-                base.$Wrapper.css(base.addCssSpeed(base.options.paginationSpeed));
+                base.$owlWrapper.css(base.addCssSpeed(base.options.paginationSpeed));
             } else if (typeof action !== "string") {
-                base.$Wrapper.css(base.addCssSpeed(action));
+                base.$owlWrapper.css(base.addCssSpeed(action));
             }
         },
 
@@ -751,19 +763,19 @@ if (typeof Object.create !== "function") {
 
         transition3d : function (value) {
             var base = this;
-            base.$Wrapper.css(base.doTranslate(value));
+            base.$owlWrapper.css(base.doTranslate(value));
         },
 
         css2move : function (value) {
             var base = this;
-            base.$Wrapper.css({"left" : value});
+            base.$owlWrapper.css({"left" : value});
         },
 
         css2slide : function (value, speed) {
             var base = this;
 
             base.isCssFinish = false;
-            base.$Wrapper.stop(true, true).animate({
+            base.$owlWrapper.stop(true, true).animate({
                 "left" : value
             }, {
                 duration : speed || base.options.slideSpeed,
