@@ -145,6 +145,11 @@
 
   
   <div class="container">
+<<<<<<< HEAD
+=======
+  
+    <div class="row"><div class="span12"><h1>Slide</h1></div></div>
+>>>>>>> origin/master
     <div id="slides">
       <img src="images/fullimage1.jpg" alt="1">     
 	  <img src="images/fullimage2.jpg" alt="2">
@@ -179,10 +184,70 @@
 
 </body>
 </html>
+<<<<<<< HEAD
+=======
 
+<body>
+<div style="text-align:center;">
+<img id="imgItem" src="" style="display:none;"><br>
+<div id="imgTitle" style="color:white;font-family:arial;font-size:24pt;">
+</div>
+</div>
+<script>
+var g_images = [];
+var g_slideIndex = 0;
+
+function showSlide()
+{
+  $('imgTitle').hide();
+  $('imgItem').hide();
+
+  var height = 600;
+  var width = ( height / g_images[ g_slideIndex ].height ) * g_images[ g_slideIndex ].width;
+
+  $('imgItem').src = g_images[ g_slideIndex ].src;
+  $('imgItem').width = width;
+  $('imgItem').height = height;
+
+  $('imgTitle').innerHTML = g_images[ g_slideIndex ].title;
+
+  $('imgTitle').show();
+  $('imgItem').show();
+  
+  g_slideIndex++;
+  if ( g_slideIndex >= g_images.length )
+    g_slideIndex = 0;
+}
+
+new Ajax.Request( 'images.xml', { 
+  method: 'get',
+  onSuccess: function( transport ) {
+    var imageTags = transport.responseXML.getElementsByTagName( 'image' );
+
+    for( var b = 0; b < imageTags.length; b++ ) {
+      g_images.push( {
+        src: imageTags[b].getAttribute('src'),
+        title: imageTags[b].getAttribute('title'),
+        width: imageTags[b].getAttribute('width'),
+        height: imageTags[b].getAttribute('height')
+      } );
+    }
+    
+    showSlide();
+    
+    window.setInterval( showSlide, 5000 );
+  }
+} );
+
+</script>
+</body>
+</html>
+  
+  
   
   
   
   
   
 
+>>>>>>> origin/master
