@@ -2,11 +2,14 @@
 <html>
 <head>
 
-  <title>Image Slide</title>
+  <title>SlidesJS Standard Code Example</title>
+
+
   <link rel="stylesheet" href="css/example.css">
   <link rel="stylesheet" href="css/font-awesome.min.css">
 
-  <style>body {
+  <style>
+    body {
       -webkit-font-smoothing: antialiased;
       font: normal 15px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
       color: #232525;
@@ -126,7 +129,7 @@
       margin: 0 auto
     }
 
-
+    /* For tablets & smart phones */
     @media (max-width: 767px) {
       body {
         padding-left: 20px;
@@ -137,68 +140,52 @@
       }
     }
 
-
+    /* For smartphones */
     @media (max-width: 480px) {
       .container {
         width: auto
       }
     }
 
-
+    /* For smaller displays like laptops */
     @media (min-width: 768px) and (max-width: 979px) {
       .container {
         width: 724px
       }
     }
 
-
+    /* For larger displays */
     @media (min-width: 1200px) {
       .container {
         width: 1170px
       }
     }
   </style>
-
+  <!-- SlidesJS Required: -->
 </head>
 <body>
 
-
-<div class="container">
-   <div id="slides" style="overflow: hidden; display: block;">
-
-      <div class="slidesjs-container" style="overflow: hidden; position: relative; width: 940px; height: 528px;">
-         <div class="slidesjs-control" style="position: relative; left: 0px; width: 940px; height: 528px;">
-            <img src="img/img1.jpg" alt="1" class="slidesjs-slide" slidesjs-index="0" style="position: absolute; top: 0px; left: 0px; width: 100%; z-index: 10; -webkit-backface-visibility: hidden; display: block;">
-	          <img src="img/img2.jpg" alt="2" class="slidesjs-slide" slidesjs-index="1" style="position: absolute; top: 0px; left: 940px; width: 100%; z-index: 0; display: block; -webkit-backface-visibility: hidden;">
-	          <img src="img/img3.jpg" alt="3" class="slidesjs-slide" slidesjs-index="2" style="position: absolute; top: 0px; left: 0px; width: 100%; z-index: 0; display: none; -webkit-backface-visibility: hidden;">
-            <img src="img/img4.jpg" alt="4" class="slidesjs-slide" slidesjs-index="3" style="position: absolute; top: 0px; left: -940px; width: 100%; z-index: 0; display: block; -webkit-backface-visibility: hidden;">
-         </div>
-      </div>
-    <a class="slidesjs-previous slidesjs-navigation" href="#" title="Previous">Previous</a>
-    <a class="slidesjs-next slidesjs-navigation" href="#" title="Next">Next</a>
-    <a class="slidesjs-play slidesjs-navigation slidesjs-playing" href="#" title="Play" style="display: none;">Play</a>
-    <a class="slidesjs-stop slidesjs-navigation" href="#" title="Stop" style="">Stop</a>
-     <ul class="slidesjs-pagination">
-     <li class="slidesjs-pagination-item">
-      <a href="#" data-slidesjs-item="0" class="">1</a></li>
-     <li class="slidesjs-pagination-item">
-               <a href="#" data-slidesjs-item="1" class="">2</a></li>
-     <li class="slidesjs-pagination-item">
-               <a href="#" data-slidesjs-item="2" class="">3</a></li>
-    <li class="slidesjs-pagination-item">
-               <a href="#" data-slidesjs-item="3" class="active">4</a></li>
-                 
-     </ul>
-
+  <!-- SlidesJS Required: Start Slides -->
+  <!-- The container is used to define the width of the slideshow -->
+  <div class="container">
+    <div id="slides">
+      <img src="img/img1.jpg" alt="1">
+      <img src="img/img2.jpg" alt="2">
+      <img src="img/img3.jpg" alt="3">
+      <img src="img/img4.jpg" alt="4">
     </div>
-</div>
+  </div>
+  <!-- End SlidesJS Required: Start Slides -->
 
+  <!-- SlidesJS Required: Link to jQuery -->
   <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <!-- End SlidesJS Required -->
 
+  <!-- SlidesJS Required: Link to jquery.slides.js -->
   <script src="js/jquery.slides.min.js"></script>
+  <!-- End SlidesJS Required -->
 
-
-
+  <!-- SlidesJS Required: Initialize SlidesJS with a jQuery doc ready -->
   <script>
     $(function() {
       $('#slides').slidesjs({
@@ -213,6 +200,4 @@
       });
     });
   </script>
-
-</body>
-</html>
+  <!-- End SlidesJS Required -->
