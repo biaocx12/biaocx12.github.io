@@ -8,7 +8,7 @@ body {
 	color: #cc3030;
 	font: 12px/14px Helvetica, Arial, sans-serif;
 	text-align: center;
-	background-color: #fff7cc; /*fff8ca*/
+	background-color: #fff7cc;
 }
 
 img {
@@ -85,7 +85,7 @@ h3 {
 	color: #fff7cc;
 	text-align: center;
 	font: 12px/14px Helvetica, Arial, sans-serif;
-	/*border-bottom: 1px solid #333;*/
+
 }
 
 #links ul {
@@ -106,8 +106,7 @@ h3 {
 }
 
 #slider {
-	/*width: 780px;*/
-	/*border: 1px solid #0f0;*/
+
 	margin: 0 auto;
 	background-color: #fff;
 	border: 1px solid #333;
@@ -121,12 +120,12 @@ h3 {
 	list-style-type: none;
 	width: 690px;
 	height: 348px;
-	/*border: 1px solid #00f;*/
+
 }
 
 #slider ul li {
 	float: left;
-	/*border: 1px solid #f00;*/
+
 	width: 320px;
 	height: 480px;
 	text-align: center;
@@ -135,14 +134,14 @@ h3 {
 }
 
 #slider ul li a {
-	/*display: block;*/
+
 	height: auto;
 	color: #333;
 	text-decoration: none;
 }
 
 #slider ul li a:hover {
-	/*color: #ff0ff0;*/
+
 	text-decoration: underline;
 }
 
