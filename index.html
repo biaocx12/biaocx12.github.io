@@ -163,15 +163,35 @@
 <body>
 
 
-  <div class="container">
-    <div id="slides">
-      <img src="img/img1.jpg" alt="1">
-      <img src="img/img2.jpg" alt="2">
-      <img src="img/img3.jpg" alt="3">
-      <img src="img/img4.jpg" alt="4">
-    </div>
-  </div>
+<div class="container">
+   <div id="slides" style="overflow: hidden; display: block;">
 
+      <div class="slidesjs-container" style="overflow: hidden; position: relative; width: 940px; height: 528px;">
+         <div class="slidesjs-control" style="position: relative; left: 0px; width: 940px; height: 528px;">
+            <img src="img/img1.jpg" alt="1" class="slidesjs-slide" slidesjs-index="0" style="position: absolute; top: 0px; left: 0px; width: 100%; z-index: 10; -webkit-backface-visibility: hidden; display: block;">
+	          <img src="img/img2.jpg" alt="2" class="slidesjs-slide" slidesjs-index="1" style="position: absolute; top: 0px; left: 940px; width: 100%; z-index: 0; display: block; -webkit-backface-visibility: hidden;">
+	          <img src="img/img3.jpg" alt="3" class="slidesjs-slide" slidesjs-index="2" style="position: absolute; top: 0px; left: 0px; width: 100%; z-index: 0; display: none; -webkit-backface-visibility: hidden;">
+            <img src="img/img4.jpg" alt="4" class="slidesjs-slide" slidesjs-index="3" style="position: absolute; top: 0px; left: -940px; width: 100%; z-index: 0; display: block; -webkit-backface-visibility: hidden;">
+         </div>
+      </div>
+    <a class="slidesjs-previous slidesjs-navigation" href="#" title="Previous">Previous</a>
+    <a class="slidesjs-next slidesjs-navigation" href="#" title="Next">Next</a>
+    <a class="slidesjs-play slidesjs-navigation slidesjs-playing" href="#" title="Play" style="display: none;">Play</a>
+    <a class="slidesjs-stop slidesjs-navigation" href="#" title="Stop" style="">Stop</a>
+     <ul class="slidesjs-pagination">
+     <li class="slidesjs-pagination-item">
+      <a href="#" data-slidesjs-item="0" class="">1</a></li>
+     <li class="slidesjs-pagination-item">
+               <a href="#" data-slidesjs-item="1" class="">2</a></li>
+     <li class="slidesjs-pagination-item">
+               <a href="#" data-slidesjs-item="2" class="">3</a></li>
+    <li class="slidesjs-pagination-item">
+               <a href="#" data-slidesjs-item="3" class="active">4</a></li>
+                 
+     </ul>
+
+    </div>
+</div>
 
   <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 
