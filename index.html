@@ -3,39 +3,11 @@
 <head>
   
   <title>Image Slide</title>
-  <link rel="stylesheet" href="css/example.css">
-  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link href="css/example.css"  rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/bootstrapTheme.css" rel="stylesheet">
 
-  <style>
-    body {
-      -webkit-font-smoothing: antialiased;
-      font: normal 15px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
-      color: #232525;
-      padding-top:70px;
-    }
-
-    #slides {
-      display: none
-    }
-
-    #slides .slidesjs-navigation {
-      margin-top:5px;
-    }
-
-    a.slidesjs-next,
-    a.slidesjs-previous,
-    a.slidesjs-play,
-    a.slidesjs-stop {
-      background-image: url(img/btns-next-prev.png);
-      background-repeat: no-repeat;
-      display:block;
-      width:12px;
-      height:18px;
-      overflow: hidden;
-      text-indent: -9999px;
-      float: left;
-      margin-right:5px;
-    }
+  <style>body {-webkit-font-smoothing: antialiased;font: normal 15px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;color: #232525;padding-top:70px;}#slides {display: none}#slides .slidesjs-navigation {margin-top:5px;}a.slidesjs-next,a.slidesjs-previous,a.slidesjs-play,a.slidesjs-stop {background-image: url(img/btns-next-prev.png);background-repeat: no-repeat;display:block;width:12px;height:18px;overflow: hidden;text-indent: -9999px;float: left;margin-right:5px;}
 
     a.slidesjs-next {
       margin-right:10px;
@@ -145,7 +117,7 @@
       }
     }
 
-    /* For smaller displays like laptops */    @media (min-width: 768px) and (max-width: 979px) {
+   @media (min-width: 768px) and (max-width: 979px) {
       .container {
         width: 724px
       }
@@ -163,6 +135,11 @@
 <body>
 
   <div class="container">
+      <div class="row">
+         <div class="span">
+            <h1>Image Slide</h1>
+         </div>
+      </div>
     <div id="slides">
       <img src="img/img1.jpg" alt="">
       <img src="img/img2.jpg" alt="">
