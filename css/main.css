@@ -16,7 +16,7 @@ img {
 	display: inline;
 }
 
-/*<group=hacks>*/
+
 
 .clearfix {
 	display: inline-table;
@@ -30,7 +30,7 @@ img {
 	visibility: hidden;
 }
 
-/* Hides from IE-mac \*/
+
 
 * html .clearfix {
 	height: 1%;
@@ -169,44 +169,26 @@ h3 {
 }
 
 #butright {
-	margin-left: 4px;
+	margin-left: 5px;
 }
 
 #controls {
-	width: 100px;
-	margin: 0 auto;
+	width: 50px;
+	margin: 4 auto;
 }
 
 #texts {
-	width: 330px;
+	width: 430px;
 	height: 140px;
 	margin: 16px auto 4px auto;
 }
 
 .text {
-	width: 300px;
+	width: 400px;
 	height: 100px;
 	border: 1px solid #333;
 	background-color: #fff;
 	padding: 12px;
 	color: #333;
 	overflow: auto;
-}
-
-#footer {
-	border-top: 1px solid #666;
-	width: 600px;
-	margin: 0 auto;
-	text-align: center;
-	color: #666;
-	padding-top: 4px;
-}
-
-#footer a {
-	color: #444;
-	text-decoration: underline;
-}
-
-#footer a:hover {
-	text-decoration: none;
 }
