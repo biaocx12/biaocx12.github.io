@@ -1,0 +1,308 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>pingpong by real21c</title>
+<script type="text/javascript">
+/* 스코어 */
+var score1 = 0;
+var score2 = 0;
+/**
+ * 객체가 움직이는 백 그라운드
+ */
+var Canvas = {
+WIDTH: 40
+, HEIGHT: 18
+, getObject: function(){
+return document.getElementById("canvas");
+}
+, initializeBlock: function(x, y){
+if (x==undefined) this.WIDTH = 40;
+if (y==undefined) this.HEIGHT = 18;
+var str = "<table cellpadding=\"0\" cellspacing=\"0\">";
+for(var i=1;i<=Canvas.HEIGHT;i++){
+str += "<tr><td bgcolor=\"#EEEEEE\">";
+for(var j=1;j<=Canvas.WIDTH;j++){
+str+="<input type=\"text\" name=\"block"+i+"_"+j+"\" id=\"block"+i+"_"+j+"\" style=\"width:15px;border:0px;background-Color:#EEEEEE;\"/>";
+}
+str += "</td></tr>";
+}
+str+="</table>";
+Canvas.getObject().innerHTML = str;
+}
+}
+
+/**
+ * 플레이어 프로토타입
+ */
+function _User(){
+this.widthCount = 4;
+this.leftFocus = 10;
+this.topFocus = 10;
+this.oldX = this.leftFocus;
+this.oldY = this.topFocus;
+}
+
+_User.prototype.setPoint = function(x, y, color){
+this.leftFocus = x;
+this.topFocus = y;
+this.color = color;
+this.oldX = this.leftFocus;
+this.oldY = this.topFocus;
+}
+
+_User.prototype.setWidth = function(width){
+this.widthCount = width;
+}
+
+_User.prototype.moveLeft = function(){
+if (this.leftFocus==1) return false;
+this.oldX = this.leftFocus;
+this.leftFocus--;
+this.printCanvas();
+}
+
+_User.prototype.moveRight = function(){
+if (parseInt(Canvas.WIDTH)==parseInt(this.leftFocus+this.widthCount)) return false;
+
+this.oldX = this.leftFocus;
+this.leftFocus++;
+this.printCanvas();
+}
+
+_User.prototype.repairCanvas = function(){
+var startLeft = this.oldX;
+var endLeft = Canvas.WIDTH;
+for(var i=startLeft;i<=endLeft;i++){
+var objTemp = document.getElementById("block"+String(this.oldY)+"_"+String(i));
+objTemp.style.backgroundColor = "#EEEEEE";
+}
+}
+_User.prototype.printCanvas = function(){
+this.repairCanvas();
+var startLeft = this.leftFocus;
+var endLeft = this.leftFocus + this.widthCount;
+for(var i=startLeft;i<=endLeft;i++){
+var objTemp = document.getElementById("block"+this.topFocus+"_"+i);
+objTemp.style.backgroundColor = this.color;
+}
+}
+
+/**
+ * 공 프로토타입
+ */
+function _Ball(){
+this.speed = 5;
+this.x = 5;
+this.y = 5;
+this.color = "black";
+this.p1 = null;
+this.p2 = null;
+this.flagLeft = true;
+this.flagTop = true;
+}
+
+_Ball.prototype.setPoint = function(x, y, color){
+this.x = x;
+this.y = y;
+this.color = color;
+this.oldX = this.x;
+this.oldY = this.y;
+}
+
+_Ball.prototype.setSpeed = function(speed){
+this.speed = speed;
+}
+
+_Ball.prototype.repairCanvas = function(){
+var objTemp = document.getElementById("block"+this.oldY+"_"+this.oldX);
+objTemp.style.backgroundColor = "#EEEEEE";
+}
+
+_Ball.prototype.printCanvas = function(){
+var objTemp = document.getElementById("block"+this.y+"_"+this.x);
+objTemp.style.backgroundColor = this.color;
+}
+ 
+
+_Ball.prototype.moveTop = function(){
+ball.oldY = ball.y;
+if ((this.x>=player2.leftFocus) &&
+(this.x<=parseInt(player2.leftFocus+player2.widthCount))&&
+(this.y==player2.topFocus+1)){
+this.flagTop = !this.flagTop;
+}
+else if (this.y==1){
+cpu.onExit = true;
+/* 점수 갱신 */
+score2 = score2 + 1;
+document.getElementById("textScore2").value = score2;
+/* 승리 결과 출력 */
+if( score2 == 3 )
+{
+ alert("Bottom player winner!");
+ score2 = 0;
+ document.getElementById("textScore2").value = score2;
+}
+}
+else{
+this.y--;
+}
+}
+
+_Ball.prototype.moveBottom = function()
+{
+ball.oldY = ball.y;
+if ((this.x>=player1.leftFocus) &&
+(this.x<=parseInt(player1.leftFocus+player1.widthCount))&&
+(this.y==Canvas.HEIGHT-1)){
+
+this.flagTop = !this.flagTop;
+}
+else if (this.y==Canvas.HEIGHT){
+cpu.onExit=true;
+/* 점수 갱신 */
+score1 = score1 + 1;
+document.getElementById("textScore1").value = score1;
+/* 승리 결과 출력 */
+if( score1 == 3 )
+{
+ alert("Top player winner!");
+ 
+ score1 = 0;
+ document.getElementById("textScore1").value = score1;
+}
+}
+else{
+this.y++;
+}
+}
+_Ball.prototype.moveLeft = function(){
+ball.oldX = ball.x;
+if (this.x==2) this.flagLeft = !this.flagLeft
+else this.x--;
+}
+_Ball.prototype.moveRight = function(){
+ball.oldX = ball.x;
+if (this.x==Canvas.WIDTH-1) this.flagLeft = !this.flagLeft;
+else this.x++;
+}
+
+/**
+ * 게임 엔진
+ */
+var cpu = {
+_BALL: null
+, onFlag: false
+, onExit: false
+, checkTime: 150
+, doPlay: function(){
+if (this.onFlag && !this.onExit){
+if (this._BALL.flagLeft) this._BALL.moveLeft()
+else if (!this._BALL.flagLeft) this._BALL.moveRight();
+if (this._BALL.flagTop) this._BALL.moveTop()
+else if (!this._BALL.flagTop) this._BALL.moveBottom();
+
+this._BALL.repairCanvas();
+this._BALL.printCanvas();
+this._BALL.repairCanvas();
+}
+this.setCheckTime(this.checkTime);
+}
+, setCheckTime: function(millisec){
+this.checkTime = millisec;
+setTimeout("cpu.doPlay();", this.checkTime);
+}
+, setLinkBall: function(obj){
+this._BALL = obj;
+}
+}
+
+/**
+ * 키보드 이벤트
+ */
+document.onkeydown = function(e){
+if (window.event){
+e = window.event;
+}
+var keyCode = e.keyCode;
+if (keyCode==27){
+cpu.onExit = true;
+}
+else if ((keyCode==65) || (keyCode==68) || (keyCode==37) || (keyCode==39)){
+
+cpu.onFlag = true;
+if (keyCode==65) player1.moveLeft()
+else if (keyCode==68) player1.moveRight()
+else if (keyCode==37) player2.moveLeft()
+else if (keyCode==39) player2.moveRight();
+}
+}
+
+/**
+ * 인스턴스 생성
+ */
+var player1 = new _User();
+player1.setPoint(18, Canvas.HEIGHT, "red");
+player1.setWidth(7);
+
+var player2 = new _User();
+player2.setPoint(18, 1, "blue");
+player2.setWidth(7);
+
+var ball = new _Ball();
+ball.setPoint(17, 10, "black");
+ball.setSpeed(25);
+
+</script>
+</head>
+<body>
+<div id="canvas" leftmargin="0" topmargin="0"></div>
+<input type="button" value="START" name="buttonDraw" onclick="cpu.onFlag = true;"/>
+<!-- 리셋버튼 -->
+<input type="button" value="RESET" name="buttonReset" onclick="javascript_:reset();"/>
+<!-- 스코어 -->
+<input type="text" value="0" id="textScore1" />
+<span> : </span>
+<input type="text" value="0" id="textScore2"/>
+<script type="text/javascript">
+// 초기화
+Canvas.initializeBlock(40, 20);
+// 플레이어 출력
+player1.printCanvas();
+player2.printCanvas();
+
+// 볼 설정
+ball.printCanvas();
+
+// 타임아웃 설정
+cpu.setCheckTime(150);
+cpu.setLinkBall(ball);
+function reset()
+{
+ cpu.onFlag = false;
+ cpu.onExit = false;
+ 
+ player1.setPoint(18, Canvas.HEIGHT, "red");
+ player1.setWidth(7);
+
+ player2.setPoint(18, 1, "blue");
+ player2.setWidth(7);
+
+ ball.setPoint(17, 10, "black");
+ //ball.setSpeed(25);
+ 
+ Canvas.initializeBlock(40, 20);
+ // 플레이어 출력
+ player1.printCanvas();
+ player2.printCanvas();
+
+ // 볼 설정
+ ball.printCanvas();
+
+ // 타임아웃 설정
+ //cpu.setCheckTime(150);
+ //cpu.setLinkBall(ball);
+}
+</script>
+</body>
+</html>
