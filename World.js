@@ -3,7 +3,7 @@ World = function() {
 }
 
 World.prototype.Render = function() {
-	////////°ÔÀÓ °ø°£ È®ÀÎ////////
+	////////ê²Œì„ ê³µê°„ í™•ì¸////////
 	var theCanvas = document.getElementById("GameCanvas");
 	var Context = theCanvas.getContext("2d");
 
@@ -19,13 +19,13 @@ World.prototype.Render = function() {
 }
 
 World.prototype.location = function(object) {
-	////////°ÔÀÓ °ø°£ »ó¿¡¼­ ¿ÀºêÁ§Æ®ÀÇ À§Ä¡ È®ÀÎ////////
+	////////ê²Œì„ ê³µê°„ ìƒì—ì„œ ì˜¤ë¸Œì íŠ¸ì˜ ìœ„ì¹˜ í™•ì¸////////
 
 	for (var i = 0; i < 31; i++) {
 		for (var j = 0; j < 10; j++) {
 			if ((object.y < (j * 32) + 32 && object.last_y > (i * 32)) || (object.last_y > (j * 32) && object.y < (j * 32) + 32)) {
 				if ((object.x < (i * 40) + 40 && object.last_x > (i * 40)) || (object.last_x > (i * 40) && object.x < (i * 40) + 40)) {
-					//console.log(object.x+","+object.y," °ø°£À§Ä¡->"+i+","+j);
+					//console.log(object.x+","+object.y," ê³µê°„ìœ„ì¹˜->"+i+","+j);
 					object.i = i;
 					object.j = j;
 				}
@@ -36,7 +36,7 @@ World.prototype.location = function(object) {
 
 World.prototype.gravity_down = function(object) {
 
-	//console.log("Áß·Â");
+	//console.log("ì¤‘ë ¥");
 	if (object.jump == 0) {
 		if (object.Coll == 0) {
 			object.g_count++;
@@ -65,4 +65,3 @@ World.prototype.gravity_up = function(object) {
 	}
 }
 var game_world = new World();
-

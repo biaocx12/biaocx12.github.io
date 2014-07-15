@@ -2,7 +2,7 @@ window.addEventListener("load", onPageLoadComplete, false);
 
 // var Player.jump = 0;
 // var E_Player.jump=0;
-var direc = 0; // 0:¿ŞÂÊ, 1:¿À¸¥ÂÊ
+var direc = 0; // 0:ì™¼ìª½, 1:ì˜¤ë¥¸ìª½
 var E_direc = 0;
 var FloorColl = 0;
 var BlockColl = 0;
@@ -87,8 +87,8 @@ function KeyInput() {
 	//console.log(Player.jump);
 
 	if (inputSystem.isKeyDown(37) && BlockColl == 0) {
-		// ¿ŞÂÊ
-		//console.log("¿ŞÂÊ");
+		// ì™¼ìª½
+		//console.log("ì™¼ìª½");
 		direc = 0;
 		if(Player.jump == 0){
 			Player.Image_Change("Resource/player_left.png");
@@ -96,7 +96,7 @@ function KeyInput() {
 		}
 		Player.x -= 2;
 	} else if (inputSystem.isKeyDown(39)  && BlockColl == 0) {
-		// ¿À¸¥ÂÊ
+		// ì˜¤ë¥¸ìª½
 		direc = 1;
 		if(Player.jump == 0){
 			Player.Image_Change("Resource/player_right.png");
@@ -105,7 +105,7 @@ function KeyInput() {
 		Player.x += 2;
 	}
 	else if (inputSystem.isKeyDown(38) && FloorColl == 1) {
-		// À§ÂÊ
+		// ìœ„ìª½
 		direc = 2;
 		if(Player.jump == 0){
 			Player.Image_Change("Resource/player_Floor.png");
@@ -113,7 +113,7 @@ function KeyInput() {
 		}
 		Player.y -= 2;
 	} else if (inputSystem.isKeyDown(40) && FloorColl == 1) {
-		// ¾Æ·¡ÂÊ
+		// ì•„ë˜ìª½
 		direc = 3;
 		if(Player.jump == 0){
 			Player.Image_Change("Resource/player_Floor.png");
@@ -126,7 +126,7 @@ function KeyInput() {
 	}
 
 	if (inputSystem.isKeyDown(32) && Player.g_count == 0) {
-		// Á¡ÇÁ
+		// ì í”„
 		Player.jump = 1;
 		Player.y-=2;
 		Player.gravity = 4;

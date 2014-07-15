@@ -2,7 +2,7 @@ Object = function(x, y, type, img_name, obj_type) {
 	this.type = type;
 
 	this.obj_type = obj_type;
-	// ¿ÀºêÁ§Æ®ÀÇ Å¸ÀÔ. 0: ÇÃ·¹ÀÌ¾î, 1: ºí·°, 2: »ç´Ù¸®, 3:º¸¼®, 4 : ¿¡³Ê¹Ì
+	// ì˜¤ë¸Œì íŠ¸ì˜ íƒ€ì…. 0: í”Œë ˆì´ì–´, 1: ë¸”ëŸ­, 2: ì‚¬ë‹¤ë¦¬, 3:ë³´ì„, 4 : ì—ë„ˆë¯¸
 
 	this.Coll = 0;
 
@@ -22,7 +22,7 @@ Object = function(x, y, type, img_name, obj_type) {
 	this.g_count = 0;
 
 	this.img = new SpriteAnimation(this.objdect_img, 40, 32, 4, 6);
-	// Å¸ÀÔ 1 : ¿òÁ÷ÀÌ´Â ÀÌ¹ÌÁö
+	// íƒ€ì… 1 : ì›€ì§ì´ëŠ” ì´ë¯¸ì§€
 }
 
 Object.prototype.Position_Update = function() {
@@ -38,7 +38,7 @@ Object.prototype.Render = function() {
 	Context.font = '10px Arial';
 	Context.textBaseline = "top";
 
-	//console.log("¿ÀºêÁ§Æ® ·£´õ È£Ãâ");
+	//console.log("ì˜¤ë¸Œì íŠ¸ ëœë” í˜¸ì¶œ");
 	this.img.Render(Context);
 	this.img.SetPosition(this.x, this.y);
 
@@ -57,19 +57,19 @@ Object.prototype.ImageType_Change_Change = function(type) {
 
 Object.prototype.Head = function(obj) {
 
-	if (this.y - obj.y > 0)// ¾ç¼öÀÏ °æ¿ì : ÇÃ·¹ÀÌ¾î À§Ãø À§Ä¡
+	if (this.y - obj.y > 0)// ì–‘ìˆ˜ì¼ ê²½ìš° : í”Œë ˆì´ì–´ ìœ„ì¸¡ ìœ„ì¹˜
 	{
 		E_direc = 0;
 	}
-	if (this.y - obj.y < 0)// À½¼öÀÏ °æ¿ì : ÇÃ·¹ÀÌ¾î ¾Æ·¡Ãø À§Ä¡
+	if (this.y - obj.y < 0)// ìŒìˆ˜ì¼ ê²½ìš° : í”Œë ˆì´ì–´ ì•„ë˜ì¸¡ ìœ„ì¹˜
 	{
 		E_direc = 1;
 	} else {
-		if (this.x - obj.x > 0)// ¾ç¼öÀÏ °æ¿ì : ÇÃ·¹ÀÌ¾î ÁÂÃø À§Ä¡
+		if (this.x - obj.x > 0)// ì–‘ìˆ˜ì¼ ê²½ìš° : í”Œë ˆì´ì–´ ì¢Œì¸¡ ìœ„ì¹˜
 		{
 			E_direc = 2;
 		}
-		if (this.x - obj.x < 0)// À½¼öÀÏ °æ¿ì : ÇÃ·¹ÀÌ¾î ¿ìÃø À§Ä¡
+		if (this.x - obj.x < 0)// ìŒìˆ˜ì¼ ê²½ìš° : í”Œë ˆì´ì–´ ìš°ì¸¡ ìœ„ì¹˜
 		{
 			E_direc = 3;
 		}
@@ -95,10 +95,10 @@ Object.prototype.Collision = function(object) {
 		if ((object.x + 13 < this.last_x && object.last_x - 13 > this.x) || (object.last_x - 13 > this.x && object.x + 13 < this.last_x)) {
 			//console.log(this.obj_type);
 			object.Coll = 1;
-			// Ãæµ¹
-			if (this.obj_type == 2) {// »ç´Ù¸® ¿ÀºêÁ§Æ®¿Í Ãæµ¹
-				//console.log("»ç´Ù¸®Ãæµ¹");
-				if (object.last_y > this.y && object.last_y < this.last_y - 20)// ¸¸¾à ¿ÀºêÁ§Æ®ÀÇ y³¡ÀÌ Ãæµ¹ÇÑ ¿ÀºêÁ§Æ®ÀÇ y³¡º¸´Ù ³ôÀº°÷¿¡ À§Ä¡ÇØ ÀÖ´Ù¸é
+			// ì¶©ëŒ
+			if (this.obj_type == 2) {// ì‚¬ë‹¤ë¦¬ ì˜¤ë¸Œì íŠ¸ì™€ ì¶©ëŒ
+				//console.log("ì‚¬ë‹¤ë¦¬ì¶©ëŒ");
+				if (object.last_y > this.y && object.last_y < this.last_y - 20)// ë§Œì•½ ì˜¤ë¸Œì íŠ¸ì˜ yëì´ ì¶©ëŒí•œ ì˜¤ë¸Œì íŠ¸ì˜ yëë³´ë‹¤ ë†’ì€ê³³ì— ìœ„ì¹˜í•´ ìˆë‹¤ë©´
 				{
 					object.gravity = 0;
 					object.g_count = 0;
@@ -115,20 +115,20 @@ Object.prototype.Collision = function(object) {
 				object.g_count = 1;
 			} else {
 				FloorColl = 0;
-				//console.log("»ç´Ù¸®ºñÃæµ¹" + FloorColl);
+				//console.log("ì‚¬ë‹¤ë¦¬ë¹„ì¶©ëŒ" + FloorColl);
 			}
 			if (this.obj_type == 3) {
-				//console.log("º¸¼®Ãæµ¹");
+				//console.log("ë³´ì„ì¶©ëŒ");
 				this.appear = 0;
 			}
 			if (this.obj_type == 4) {
-				// ¿¡³Ê¹Ì¿ÍÀÇ Ãæµ¹
+				// ì—ë„ˆë¯¸ì™€ì˜ ì¶©ëŒ
 			}
-			if (this.obj_type == 1) {// ºí·°Å¸ÀÔ ¿ÀºêÁ§Æ®ÀÇ Ãæµ¹
+			if (this.obj_type == 1) {// ë¸”ëŸ­íƒ€ì… ì˜¤ë¸Œì íŠ¸ì˜ ì¶©ëŒ
 
-				if (object.last_y > this.y && object.last_y < this.last_y - 20)// ¸¸¾à ¿ÀºêÁ§Æ®ÀÇ y³¡ÀÌ Ãæµ¹ÇÑ ¿ÀºêÁ§Æ®ÀÇ y³¡º¸´Ù ³ôÀº°÷¿¡ À§Ä¡ÇØ ÀÖ´Ù¸é
+				if (object.last_y > this.y && object.last_y < this.last_y - 20)// ë§Œì•½ ì˜¤ë¸Œì íŠ¸ì˜ yëì´ ì¶©ëŒí•œ ì˜¤ë¸Œì íŠ¸ì˜ yëë³´ë‹¤ ë†’ì€ê³³ì— ìœ„ì¹˜í•´ ìˆë‹¤ë©´
 				{
-					//console.log("º®µ¹Ãæµ¹");
+					//console.log("ë²½ëŒì¶©ëŒ");
 					object.y = this.y - 31;
 					object.gravity = 0;
 					object.g_count = 0;
@@ -149,9 +149,9 @@ Object.prototype.Collision = function(object) {
 						//object.g_count = 0;
 						//object.jump = 0;
 					}
-					if (direc == 0 && object.y < this.last_y - 10)// ¿ŞÂÊÀ¸·ÎºÎÅÍ
+					if (direc == 0 && object.y < this.last_y - 10)// ì™¼ìª½ìœ¼ë¡œë¶€í„°
 						object.x += 2;
-					else if (direc == 1 && object.y < this.last_y - 10)// ¿À¸¥ÂÊÀ¸·ÎºÎÅÍ
+					else if (direc == 1 && object.y < this.last_y - 10)// ì˜¤ë¥¸ìª½ìœ¼ë¡œë¶€í„°
 						object.x -= 2;
 				}
 			} else {
@@ -159,13 +159,13 @@ Object.prototype.Collision = function(object) {
 			}
 		} else {
 			object.Coll = 0;
-			//console.log("xºñÃæµ¹");
-			// ºñÃæµ¹
+			//console.log("xë¹„ì¶©ëŒ");
+			// ë¹„ì¶©ëŒ
 		}
 	} else {
 		object.Coll = 0;
-		//console.log("yºñÃæµ¹");
-		// ºñÃæµ¹
+		//console.log("yë¹„ì¶©ëŒ");
+		// ë¹„ì¶©ëŒ
 	}
 }
 Player = new Object(640, 64, 0, "Resource/player_left.png", 0);
